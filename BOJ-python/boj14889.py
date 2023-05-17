@@ -19,7 +19,7 @@ def dfs(depth, idx):
     for i in range(idx, n):
         if not visit[i]:
             visit[i] = True
-            dfs(depth+1, i+1)
+            dfs(depth + 1, i + 1)
             visit[i] = False
 
 
