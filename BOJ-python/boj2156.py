@@ -1,8 +1,8 @@
 if __name__ == '__main__':
     n = int(input())
-    arr = [0] * (n + 1)
-    for i in range(1, n + 1):
-        arr[i] = int(input())
+    arr = [0] * (n + 2)
+    for i in range(n):
+        arr[i + 1] = int(input())
 
     result = [0] * (n + 2)
     result[1] = arr[1]
