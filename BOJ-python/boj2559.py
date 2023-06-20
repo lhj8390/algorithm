@@ -1,11 +1,11 @@
 if __name__ == '__main__':
     n, k = map(int, input().split())
     arr = list(map(int, input().split()))
-    result = [[0] * (n + 1)] * (n + 1)
+    tmp = sum(arr[:k])
+    result = tmp
 
-    result[1] = arr
-    for i in range(2, n):
-        for j in range(n - i):
-            result[i][j] = result[i - 1][j] + arr[i]
+    for i in range(k, n):
+        tmp += arr[i] - arr[i - k]
+        result = max(result, tmp)
 
     print(result)
