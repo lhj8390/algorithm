@@ -1,11 +1,12 @@
+# 부분합 문제
 if __name__ == '__main__':
     n, m = map(int, input().split())
     arr = list(map(int, input().split()))
 
-    cnt = 0
-    for i in range(n):
-        for j in range(i, n):
-            if sum(arr[i:j + 1]) % m == 0:
-                cnt += 1
+    sums = [0] * (n + 1)  # 부분합 배열
+    cnt_arr = [0] * (m + 1)  # 나머지가 같은 것 끼리 카운트
+    for i in range(1, n ):
+        sums[i] += (sums[i - 1] + arr[i]) % m
+        cnt_arr[sums[i]] += 1
 
-    print(cnt)
+    print(sum(cnt_arr))
