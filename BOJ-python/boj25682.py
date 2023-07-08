@@ -4,32 +4,34 @@ if __name__ == '__main__':
     input = sys.stdin.readline
 
     n, m, k = map(int, input().split())
+    data = []
     chess = []
 
-    # 생각하는 알고리즘
-    # 1. W인지 B인지 체크
-    # 2. 누적합을 사용해서 B의 개수 누적으로 체크
-    # 3. 구간을 정해서 B의 합 체크
-    # 4. 최솟값 확인
-
     for _ in range(n):
-        data = input()
-        parsed = []
-        for d in data:
-            if d == "W":
-                parsed.append(1)
-            else:
-                parsed.append(0)
-        chess.append(parsed)
+        data.append(list(input().rstrip()))
 
-    print(chess)
-
-    result = [[0] * (n + 1) for _ in range(m + 1)]
-    print(result)
+    result = [[0] * (m + 1) for _ in range(n + 1)]
 
     for i in range(1, n + 1):
         for j in range(1, m + 1):
-            result[i][j] = result[i - 1][j] + result[i][j - 1] - result[i - 1][j - 1] + chess[i - 1][j - 1]
+            if (i + j) % 2 == 0:  # B로 시작 해야 할 때
+                if data[i - 1][j - 1] == 'B':
+                    result[i][j] = result[i - 1][j] + result[i][j - 1] - result[i - 1][j - 1]
+                else:  # B 가 아닐 경우
+                    result[i][j] = result[i - 1][j] + result[i][j - 1] - result[i - 1][j - 1] + 1
 
-    print(result)
+            else:  # w로 시작 해야 할 때
+                if data[i - 1][j - 1] == 'W':
+                    result[i][j] = result[i - 1][j] + result[i][j - 1] - result[i - 1][j - 1]
+                else:  # B 가 아닐 경우
+                    result[i][j] = result[i - 1][j] + result[i][j - 1] - result[i - 1][j - 1] + 1
+
+    max_num = -sys.maxsize
+    min_num = sys.maxsize
+    for r in range(k, n + 1):
+        for c in range(k, m + 1):
+            max_num = max(result[r][c] - result[r - k][c] - result[r][c - k] + result[r - k][c - k], max_num)
+            min_num = min(result[r][c] - result[r - k][c] - result[r][c - k] + result[r - k][c - k], min_num)
+
+    print(min(min_num, max_num, k * k - min_num, k * k - max_num))
 
