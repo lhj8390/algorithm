@@ -8,10 +8,8 @@ if __name__ == '__main__':
 
     cnt = 0
     for a in arr:
-        # if k % a == 0:
-        #     break
-        if k // a < 10:
+        if k // a > 0:
             cnt += k // a
-            k = k - (k // a) * a
+            k = k % a
 
     print(cnt)
