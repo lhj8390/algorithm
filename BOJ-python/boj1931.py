@@ -4,15 +4,13 @@ if __name__ == '__main__':
     for _ in range(n):
         arr.append(list(map(int, input().split())))
 
-    arr.sort()
+    arr.sort(key=lambda x: (x[1], x[0]))
 
+    end = 0
     cnt = 0
-    max_num = 0
-    for a in arr:
-        conf = [False] * 2 ** 31 - 1
+    for start, finish in arr:
+        if end <= start:
+            cnt += 1
+            end = finish
 
-        for el in a:
-            if not conf[el]:
-                conf[el] = True
-
-        print(conf)
+    print(cnt)
