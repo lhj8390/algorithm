@@ -5,7 +5,6 @@ if __name__ == '__main__':
 
     n, m, k = map(int, input().split())
     data = []
-    chess = []
 
     for _ in range(n):
         data.append(list(input().rstrip()))
@@ -33,5 +32,5 @@ if __name__ == '__main__':
             max_num = max(result[r][c] - result[r - k][c] - result[r][c - k] + result[r - k][c - k], max_num)
             min_num = min(result[r][c] - result[r - k][c] - result[r][c - k] + result[r - k][c - k], min_num)
 
-    print(min(min_num, max_num, k * k - min_num, k * k - max_num))
+    print(min(min_num, max_num, k * k - min_num, k * k - max_num))  # B로 시작 또는 W로 시작 체크
 
