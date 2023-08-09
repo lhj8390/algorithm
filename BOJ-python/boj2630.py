@@ -1,13 +1,18 @@
-def logic(a, b):
+def logic(a, b, n):
     global white, blue
-    if a == 1 or b == 1:
+    color = arr[a][b]
+    for i in range(a, a + n):
+        for j in range(b, b + n):
+            if color != arr[i][j]:
+                logic(a, b, n // 2)  # 1사분면
+                logic(a, b + n // 2, n // 2)  # 2사분면
+                logic(a + n // 2, b, n // 2)  # 3사분면
+                logic(a + n // 2, b + n // 2, n // 2)  # 4사분면
+                return
+    if color == 0:
         white += 1
+    else:
         blue += 1
-        return
-    for i in range(n):
-        for j in range(n):
-            if arr[i][j] == 1:
-                logic(i // 2, j // 2)
 
 
 if __name__ == '__main__':
@@ -19,7 +24,7 @@ if __name__ == '__main__':
 
     white = 0
     blue = 0
-    logic(n, n)
+    logic(0, 0, n)
 
     print(white)
     print(blue)
