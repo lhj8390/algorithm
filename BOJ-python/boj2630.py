@@ -1,8 +1,10 @@
+# 모든 칸이 같은 색이 될 때까지 분할하는 문제
 def logic(a, b, n):
     global white, blue
-    color = arr[a][b]
+    color = arr[a][b] # 현재 색깔 (하얀색 or 파란색)
     for i in range(a, a + n):
         for j in range(b, b + n):
+            # 현재 색상과 같지 않을 경우 분할한다.
             if color != arr[i][j]:
                 logic(a, b, n // 2)  # 1사분면
                 logic(a, b + n // 2, n // 2)  # 2사분면
