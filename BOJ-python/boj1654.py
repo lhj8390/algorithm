@@ -4,15 +4,17 @@ if __name__ == '__main__':
     for _ in range(k):
         line.append(int(input()))
 
-    line.sort()
-    div_num = 2
-    # 개수가 n이 될 때까지 반복
-    while True:
-        tmp = 0
-        for li in line:
-            tmp += li // div_num
+    min_val, max_val = 1, max(line)
 
-        if tmp == n:
-            break
+    while min_val <= max_val:
+        mid = (min_val + max_val) // 2
+        cnt = 0
+        for li in line:
+            cnt += li // mid
+
+        if cnt >= n:
+            min_val = mid + 1
         else:
-            div_num += 1
+            max_val = mid - 1
+
+    print(max_val)
