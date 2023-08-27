@@ -9,4 +9,10 @@ if __name__ == '__main__':
     for i in range(1, len(coord)):
         diff.append(coord[i] - coord[i - 1])
 
-    print(diff)
+    min_dist, max_dist = 1, max(diff)
+
+    while min_dist <= max_dist:
+        mid = (min_dist + max_dist) // 2
+        max_diff = 0
+        for c in coord:
+            if max_diff < mid:
