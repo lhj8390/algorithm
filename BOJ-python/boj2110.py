@@ -6,13 +6,21 @@ if __name__ == '__main__':
         coord.append(int(input()))
 
     coord.sort()
-    for i in range(1, len(coord)):
-        diff.append(coord[i] - coord[i - 1])
 
-    min_dist, max_dist = 1, max(diff)
+    min_dist, max_dist = 1, coord[-1] - coord[0]
 
+    result = 0
     while min_dist <= max_dist:
         mid = (min_dist + max_dist) // 2
-        max_diff = 0
-        for c in coord:
-            if max_diff < mid:
+        current = coord[0]
+        cnt = 1
+        for i in range(1, len(coord)):
+            if coord[i] >= current + mid:
+                cnt += 1
+        if cnt >= c:
+            min_dist = mid + 1
+            result = mid
+        else:
+            max_dist = mid - 1
+
+    print(result)
