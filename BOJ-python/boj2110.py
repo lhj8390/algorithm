@@ -17,6 +17,7 @@ if __name__ == '__main__':
         for i in range(1, len(coord)):
             if coord[i] >= current + mid:
                 cnt += 1
+                current = coord[i]
         if cnt >= c:
             min_dist = mid + 1
             result = mid
